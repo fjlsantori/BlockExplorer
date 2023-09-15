@@ -21,15 +21,24 @@ const alchemy = new Alchemy(settings);
 
 function App() {
   const [blockNumber, setBlockNumber] = useState();
+  const [gBlock, setgBlock] = useState();
 
   useEffect(() => {
     async function getBlockNumber() {
       setBlockNumber(await alchemy.core.getBlockNumber());
     }
     getBlockNumber();
+
+    async function getGBlock(blockNumber) {
+      setgBlock(await alchemy.core.getBlock(blockNumber));
+    }
+    getGBlock(getBlockNumber);
   });
 
-  return  <div className="App">Block Number: {blockNumber}</div>;
-}
 
+  return  <div className="App">
+    <p>Block Number: {blockNumber}</p>
+    <p>GBlock: {gBlock}</p>
+   </div>;
+}
 export default App;
