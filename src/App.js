@@ -21,8 +21,6 @@ const alchemy = new Alchemy(settings);
 
 function App() {
   const [blockNumber, setBlockNumber] = useState();
-  const [block, setBlock] = useState();
-  /* const [transactions, setTransactions] = useState(); */
 
   useEffect(() => {
     async function getBlockNumber() {
@@ -31,24 +29,8 @@ function App() {
     getBlockNumber();
   });
 
-  useEffect(() => {
-    async function getBlockData() {
-      setBlock(await alchemy.core.getBlock(blockNumber));
-    }
-    getBlockData();
-  },[blockNumber]);
-
-/*   useEffect(() => {
-    async function getTransactions() {
-      setTransactions(block.transactions);
-    }
-    getTransactions();
-  }); */
-
   return  <div className="App">
     <p>Block Number: {blockNumber}</p>
-    <p>Block information: {block.miner}</p>
-    <p>Transactions : {block.transactions}</p>
    </div>;
 }
 export default App;
