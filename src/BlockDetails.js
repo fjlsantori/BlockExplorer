@@ -16,20 +16,24 @@ const settings = {
   const alchemy = new Alchemy(settings);
 
 const BlockDetails = () => {
-    const blockNumber = parseInt(useParams().blockNumber);
+    const { blockNumber } = useParams();
     const [blockDetails, setBlockDetails] = useState();
-    
+    const [hash, setHash] = useState();
+
+    console.log("This is the BN "+blockNumber);
     useEffect(() => {
         async function getBlockDetails(){
-            setBlockDetails(await Alchemy.core.getBlock(blockNumber));
+            const blockDetails = await Alchemy.core.getBlock(blockNumber);
+            setHash(blockDetails.hash);;
         }
         getBlockDetails();
     },[blockNumber]);
 
     return (
-        <>
-        <h2>{blockDetails}</h2>
-        </>
+        <div>
+            <h1>{blockNumber}</h1>
+            <div>Hash: {hash}</div>
+        </div>
     )
 }
  

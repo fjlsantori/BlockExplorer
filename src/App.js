@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Switch, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import './App.css';
 import BlockDetails from './BlockDetails';
+import Navbar from './Navbar';
 // Refer to the README doc for more information about using API
 // keys in client-side code. You should never do this in production
 // level code.
@@ -22,20 +23,34 @@ function App() {
   const [blockNumber, setBlockNumber] = useState();
 
   useEffect(() => {
-    async function getBlockNumber() {
-      setBlockNumber(await alchemy.core.getBlockNumber());
+    async function getBlocks() {
+      try {
+        const blockNumber = await alchemy.core.getBlockNumber();
+        setBlockNumber(blockNumber);
+      } catch (err) {
+        console.log("Cannot get recent block", err);
+      }
     }
-    getBlockNumber();
-  });
+    getBlocks();
+    //eslint-disable-next-line
+  }, [blockNumber]);
 
   return (
-    <>
-      <BrowserRouter>
-        <Link to="/BlockDetails/:blockNumber">
-          {blockNumber}
-        </Link>
-      </BrowserRouter>
-    </>
+    <BrowserRouter>
+      <div className='App'>
+        <Navbar blockNumber={blockNumber}/>
+        <div className='content'>
+          <Switch>
+            <Route exact path="/">
+              {blockNumber}
+            </Route>
+            <Route path="/BlockDetails/:blockNumber">
+            <BlockDetails />
+            </Route>
+          </Switch>
+        </div>
+      </div>
+    </BrowserRouter>
   )
 }
 export default App;
