@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import BlockDetails from './BlockDetails';
 import Navbar from './Navbar';
+import BlockList from './BlockTransactions';
+import BlockTransactions from './BlockTransactions';
 // Refer to the README doc for more information about using API
 // keys in client-side code. You should never do this in production
 // level code.
@@ -33,7 +35,7 @@ function App() {
     }
     getBlocks();
     //eslint-disable-next-line
-  }, [blockNumber]);
+  }, []);
 
   return (
     <BrowserRouter>
@@ -46,6 +48,9 @@ function App() {
             </Route>
             <Route path="/BlockDetails/:blockNumber">
             <BlockDetails />
+            </Route>
+            <Route path="/BlockTransactions/:blockNumber">
+            <BlockTransactions />
             </Route>
           </Switch>
         </div>
