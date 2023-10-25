@@ -49,7 +49,7 @@ function App() {
             <Route path="/BlockDetails/:blockNumber">
             <BlockDetails />
             </Route>
-            <Route path="/BlockTransactions/:blockNumber">
+            <Route path="/BlockTransactions/:hash">
             <BlockTransactions />
             </Route>
           </Switch>

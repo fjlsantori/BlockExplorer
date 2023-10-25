@@ -36,13 +36,25 @@ const BlockDetails = () => {
         getBlockDetails();
     }, [blockNumber]);
 
+            /* If you try to render an array directly as a child element, 
+    you will trigger the “Objects Are Not Valid as a React Child” error.
+    Instead, you should use the map() method to convert each item in 
+    the array to a valid React child element. */
+
     return (
         <div>
-            <div>Block Number {blockNumber}</div>
-            <div>Block Hash {hash}</div>
-            <div>
-                <Link to={`/BlockTransactions/${blockNumber}`} element={<BlockTransactions transactions={transactions}/>}>Number of transactions {transactions.length}</Link>
-            </div>
+            <h2>Block Number</h2>
+            <p>{blockNumber}</p>
+            <h2>Block Hash</h2>
+            <p>{hash}</p>
+            <h2>Block Transactions {transactions.length}</h2>
+            <>
+                {transactions.map((transac,index) => (
+                    <div key={index}>
+                        <Link to={`/BlockTransactions/${transac.hash}`} element={<BlockTransactions/>}>{transac.hash}</Link>
+                    </div>
+                ))}
+            </>
         </div>
     )
 }
