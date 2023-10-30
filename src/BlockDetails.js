@@ -36,7 +36,7 @@ const BlockDetails = () => {
         getBlockDetails();
     }, [blockNumber]);
 
-            /* If you try to render an array directly as a child element, 
+    /* If you try to render an array directly as a child element, 
     you will trigger the “Objects Are Not Valid as a React Child” error.
     Instead, you should use the map() method to convert each item in 
     the array to a valid React child element. */
