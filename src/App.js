@@ -4,8 +4,9 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import BlockDetails from './BlockDetails';
 import Navbar from './Navbar';
-import BlockList from './BlockTransactions';
+import BlockList from './BlockList';
 import BlockTransactions from './BlockTransactions';
+
 // Refer to the README doc for more information about using API
 // keys in client-side code. You should never do this in production
 // level code.
@@ -23,6 +24,7 @@ const alchemy = new Alchemy(settings);
 
 function App() {
   const [blockNumber, setBlockNumber] = useState();
+  const lastBlocks =[];
 
   useEffect(() => {
     async function getBlocks() {
@@ -43,8 +45,8 @@ function App() {
         <Navbar blockNumber={blockNumber}/>
         <div className='content'>
           <Switch>
-            <Route exact path="/">
-              {blockNumber}
+            <Route exact path="/" >
+              <BlockList blockNumber={blockNumber}/>          
             </Route>
             <Route path="/BlockDetails/:blockNumber">
             <BlockDetails />
